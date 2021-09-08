@@ -1,16 +1,16 @@
 #' @title plasma_contamination
 #'
 #' @description This function performs an enrichment analysis to test whether a given
-#' proteomic sample is contaminated with markers from erithorocyte, platelets
+#' proteomic sample is contaminated with markers from erythrocyte, platelets
 #' or coagulation. The signatures are taken from:
 #' https://www.sciencedirect.com/science/article/pii/S2405471216300722
 #'
-#' @param df as dataframe with row names as gene symboles, and then each column
+#' @param df as data frame with row names as gene symbols, and then each column
 #' should be a sample or the t-values of a differential analysis
 #' @import decoupleR
 #' @import ggplot2
 #' @export
-#' @return a dataframe with normalised enrichment (mean) scores for the
+#' @return a data frame with normalized enrichment (mean) scores for the
 #' contamination signatures. The higher the score, the higher the potential
 #' contamination
 #' @examples

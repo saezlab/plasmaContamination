@@ -9,5 +9,5 @@ Contamination signatures obtained from: https://www.sciencedirect.com/science/ar
 if (!requireNamespace("devtools", quietly = TRUE))
     install.packages("devtools")
     
-devtools::install_github(“saezlab/plasmaContamination”)
+devtools::install_github("saezlab/plasmaContamination")
 ```

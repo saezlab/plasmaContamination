@@ -13,6 +13,5 @@ Depends:
   R(>= 4.1)
 Imports:
   ggplot2
-Remotes:
-   github::PauBadiaM/decoupleR@devel-pau
+Remotes: github::PauBadiaM/decoupleR@devel-pau
 

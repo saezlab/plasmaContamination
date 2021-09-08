@@ -2,10 +2,7 @@
 % Please edit documentation in R/plasma_contamination.R
 \name{plasma_contamination}
 \alias{plasma_contamination}
-\title{This function performs an enrichment analysis to test whether a given
-proteomic sample is contaminated with markers from erithorocyte, platelets
-or coagulation. The signatures are taken from:
-https://www.sciencedirect.com/science/article/pii/S2405471216300722}
+\title{plasma_contamination}
 \usage{
 plasma_contamination(df, n_perm = 1000, plot = T)
 }
@@ -19,6 +16,9 @@ contamination signatures. The higher the score, the higher the potential
 contamination
 }
 \description{
+plasma_contamination
+}
+\details{
 This function performs an enrichment analysis to test whether a given
 proteomic sample is contaminated with markers from erithorocyte, platelets
 or coagulation. The signatures are taken from:

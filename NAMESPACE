@@ -2,3 +2,4 @@
 
 export(plasma_contamination)
 import(decoupleR)
+import(ggplot2)

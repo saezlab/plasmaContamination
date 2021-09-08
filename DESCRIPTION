@@ -12,6 +12,7 @@ RoxygenNote: 7.1.1
 Depends: 
   R(>= 4.0)
 Imports:
-  ggplot2
+  ggplot2,
+  decoupleR
 Remotes: PauBadiaM/decoupleR@devel-pau
 

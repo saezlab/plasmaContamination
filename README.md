@@ -11,3 +11,11 @@ if (!requireNamespace("devtools", quietly = TRUE))
     
 devtools::install_github("saezlab/plasmaContamination")
 ```
+
+#tutorial
+```r
+library(plasmaContamination)
+data(test_data)
+
+conta_scores <- plasma_contamination(test_data)
+```

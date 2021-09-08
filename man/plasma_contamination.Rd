@@ -2,16 +2,31 @@
 % Please edit documentation in R/plasma_contamination.R
 \name{plasma_contamination}
 \alias{plasma_contamination}
-\title{Ipsum...}
+\title{This function performs an enrichment analysis to test whether a given
+proteomic sample is contaminated with markers from erithorocyte, platelets
+or coagulation. The signatures are taken from:
+https://www.sciencedirect.com/science/article/pii/S2405471216300722}
 \usage{
-plasma_contamination(df, n_perm = 1000)
+plasma_contamination(df, n_perm = 1000, plot = T)
 }
 \arguments{
-\item{df}{ipsum...}
+\item{df}{as dataframe with row names as gene symboles, and then each column
+should be a sample or the t-values of a differential analysis}
 }
 \value{
-ipsum...
+a dataframe with normalised enrichment (mean) scores for the
+contamination signatures. The higher the score, the higher the potential
+contamination
 }
 \description{
-Ipsum...
+This function performs an enrichment analysis to test whether a given
+proteomic sample is contaminated with markers from erithorocyte, platelets
+or coagulation. The signatures are taken from:
+https://www.sciencedirect.com/science/article/pii/S2405471216300722
+}
+\examples{
+library(plasmaContamination)
+data(test_data.Rdata)
+
+conta_scores <- plasma_contamination(test_data)
 }

@@ -1,9 +1,20 @@
-#' Ipsum...
+#' This function performs an enrichment analysis to test whether a given
+#' proteomic sample is contaminated with markers from erithorocyte, platelets
+#' or coagulation. The signatures are taken from:
+#' https://www.sciencedirect.com/science/article/pii/S2405471216300722
 #'
-#' @param df ipsum...
+#' @param df as dataframe with row names as gene symboles, and then each column
+#' should be a sample or the t-values of a differential analysis
 #' @import decoupleR
 #' @export
-#' @return ipsum...
+#' @return a dataframe with normalised enrichment (mean) scores for the
+#' contamination signatures. The higher the score, the higher the potential
+#' contamination
+#' @examples
+#' library(plasmaContamination)
+#' data(test_data.Rdata)
+#'
+#' conta_scores <- plasma_contamination(test_data)
 plasma_contamination <- function(df, n_perm = 1000, plot = T) {
   if(dim(df)[2] == 1)
   {

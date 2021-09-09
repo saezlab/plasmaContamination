@@ -4,7 +4,7 @@
 \alias{plasma_contamination}
 \title{plasma_contamination}
 \usage{
-plasma_contamination(df, n_perm = 1000, plot = T)
+plasma_contamination(df, n_perm = 1000, plot = T, verbose = T)
 }
 \arguments{
 \item{df}{as data frame with row names as gene symbols, and then each column

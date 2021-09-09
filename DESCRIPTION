@@ -2,8 +2,12 @@ Package: plasmaContamination
 Type: Package
 Title: plasma proteomic quality control
 Version: 0.1.0
-Author: Aurelien Dugourd
-Maintainer: aurelien.dugourd@bioquant.uni-heidelberg.de
+Authors@R: c(
+    person(given = "Aurélien",
+           family = "Dugourd",
+           role = c("cre","aut"),
+           email = "dugourdaurelien@gmail.com",
+           comment = c(ORCID = "0000-0002-0714-028X")))
 Description: Gives score for contamination by erithrocyte, platelet and coagulation for plasma samples
 License: GNU 3.0
 Encoding: UTF-8

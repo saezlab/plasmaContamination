@@ -27,7 +27,7 @@ plasma_contamination <- function(df, n_perm = 1000, plot = T, verbose = T) {
     }
     df <- df[complete.cases(df),,drop = F]
     df$decouplerIsGreat <- df[,1]
-    means <- decoupleR::decouple(mat = as.matrix(df), network = reg_sets, .source = "set", .target = "gene",
+    means <- decoupleR::decouple(mat = as.matrix(df), network = reg_sets, .source = "set", .target = "feature",
                                  statistics = c("mean"),
                                  args = list(
                                    mean = list(.mor = "mor", .likelihood = "likelihood", times=n_perm)
@@ -52,7 +52,7 @@ plasma_contamination <- function(df, n_perm = 1000, plot = T, verbose = T) {
       sub_df <- df[,i,drop = F]
       sub_df <- sub_df[complete.cases(sub_df),,drop = F]
       sub_df$decouplerIsGreat <- sub_df[,1]
-      means <- decoupleR::decouple(mat = as.matrix(sub_df), network = reg_sets, .source = "set", .target = "gene",
+      means <- decoupleR::decouple(mat = as.matrix(sub_df), network = reg_sets, .source = "set", .target = "feature",
                                    statistics = c("mean"),
                                    args = list(
                                      mean = list(.mor = "mor", .likelihood = "likelihood", times=n_perm)

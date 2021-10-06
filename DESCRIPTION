@@ -18,5 +18,5 @@ Depends:
 Imports:
   ggplot2,
   decoupleR
-Remotes: PauBadiaM/decoupleR@devel-pau
+Remotes: saezlab/decoupleR@development
 

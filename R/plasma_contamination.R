@@ -28,13 +28,13 @@ plasma_contamination <- function(df, n_perm = 1000, plot = T, verbose = T) {
     df <- df[complete.cases(df),,drop = F]
     df$decouplerIsGreat <- df[,1]
     means <- decoupleR::decouple(mat = as.matrix(df), network = reg_sets, .source = "set", .target = "feature",
-                                 statistics = c("mean"),
+                                 statistics = c("wmean"),
                                  args = list(
                                    mean = list(.mor = "mor", .likelihood = "likelihood", times=n_perm)
                                  )
     )
     means <- as.data.frame(means)
-    means <- means[grepl("normalized_mean",means$statistic),]
+    means <- means[grepl("norm_wmean",means$statistic),]
     means <- means[!grepl("^decouplerIsGreat$",means$condition),]
     means <- means[,-c(1,2,6)]
     names(means)[1] <- "set"
@@ -53,13 +53,13 @@ plasma_contamination <- function(df, n_perm = 1000, plot = T, verbose = T) {
       sub_df <- sub_df[complete.cases(sub_df),,drop = F]
       sub_df$decouplerIsGreat <- sub_df[,1]
       means <- decoupleR::decouple(mat = as.matrix(sub_df), network = reg_sets, .source = "set", .target = "feature",
-                                   statistics = c("mean"),
+                                   statistics = c("wmean"),
                                    args = list(
                                      mean = list(.mor = "mor", .likelihood = "likelihood", times=n_perm)
                                    )
       )
       means <- as.data.frame(means)
-      means <- means[grepl("normalized_mean",means$statistic),]
+      means <- means[grepl("norm_wmean",means$statistic),]
       means <- means[!grepl("^decouplerIsGreat$",means$condition),]
       means <- means[,-c(1,2,6)]
       names(means)[1] <- "set"

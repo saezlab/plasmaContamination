@@ -18,7 +18,12 @@
 #' data(test_data)
 #'
 #' conta_scores <- plasma_contamination(test_data)
-plasma_contamination <- function(df, n_perm = 1000, plot = T, verbose = T) {
+plasma_contamination <- function(df, n_perm = 1000, plot = T, verbose = T, signatures = NULL, manual_colors = NULL) {
+  if(is.null(signatures))
+  {
+    data("reg_sets")
+    signatures <- reg_sets
+  }
   if(dim(df)[2] == 1)
   {
     if(verbose)
@@ -27,7 +32,7 @@ plasma_contamination <- function(df, n_perm = 1000, plot = T, verbose = T) {
     }
     df <- df[complete.cases(df),,drop = F]
     df$decouplerIsGreat <- df[,1]
-    means <- decoupleR::decouple(mat = as.matrix(df), network = reg_sets, .source = "set", .target = "feature",
+    means <- decoupleR::decouple(mat = as.matrix(df), network = signatures, .source = "set", .target = "feature",
                                  statistics = c("wmean"),
                                  args = list(
                                    mean = list(.mor = "mor", .likelihood = "likelihood", times=n_perm)
@@ -52,7 +57,7 @@ plasma_contamination <- function(df, n_perm = 1000, plot = T, verbose = T) {
       sub_df <- df[,i,drop = F]
       sub_df <- sub_df[complete.cases(sub_df),,drop = F]
       sub_df$decouplerIsGreat <- sub_df[,1]
-      means <- decoupleR::decouple(mat = as.matrix(sub_df), network = reg_sets, .source = "set", .target = "feature",
+      means <- decoupleR::decouple(mat = as.matrix(sub_df), network = signatures, .source = "set", .target = "feature",
                                    statistics = c("wmean"),
                                    args = list(
                                      mean = list(.mor = "mor", .likelihood = "likelihood", times=n_perm)
@@ -69,11 +74,24 @@ plasma_contamination <- function(df, n_perm = 1000, plot = T, verbose = T) {
   }
   if(plot)
   {
-    plot(ggplot(score_df, aes(y = score, x = condition, group = set, fill = set)) +
-           geom_bar(position = "dodge", stat = "identity", color="black") +
-           theme_minimal() +
-           theme(axis.text.x=element_text(angle = 45, hjust = 1)) +
-           theme(plot.margin = unit(c(1,1,1,2), "cm")))
+    if(is.null(manual_colors))
+    {
+      plot(ggplot(score_df, aes(y = score, x = condition, group = set, fill = set)) +
+             geom_bar(position = "dodge", stat = "identity", color="black") +
+             theme_minimal() +
+             theme(axis.text.x=element_text(angle = 45, hjust = 1)) +
+             theme(plot.margin = unit(c(1,1,1,2), "cm")))
+    } else
+    {
+      plot(ggplot(score_df, aes(y = score, x = condition, group = set, fill = set)) +
+             geom_bar(position = "dodge", stat = "identity", color="black") +
+             theme_minimal() +
+             theme(axis.text.x=element_text(angle = 45, hjust = 1)) +
+             theme(plot.margin = unit(c(1,1,1,2), "cm")) +
+             scale_fill_manual(values=manual_colors))
+
+    }
+
 
   }
   return(score_df)

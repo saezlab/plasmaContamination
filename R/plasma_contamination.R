@@ -18,7 +18,7 @@
 #' data(test_data)
 #'
 #' conta_scores <- plasma_contamination(test_data)
-plasma_contamination <- function(df, n_perm = 1000, plot = T, verbose = T, signatures = NULL, manual_colors = NULL) {
+plasma_contamination <- function(df, n_perm = 1000, plot = T, verbose = T, signatures = NULL, manual_colors = NULL, lineplot = F) {
   if(is.null(signatures))
   {
     data("reg_sets")
@@ -72,27 +72,51 @@ plasma_contamination <- function(df, n_perm = 1000, plot = T, verbose = T, signa
     }
     score_df <- as.data.frame(do.call(rbind,score_list))
   }
+
+  data("quality_test_sets")
+  score_df[score_df$score < 0 & score_df$set %in% quality_test_sets, "score"] <- 0 #quality test sets are only relevant if they are positive
+
+
   if(plot)
   {
     if(is.null(manual_colors))
     {
-      plot(ggplot(score_df, aes(y = score, x = condition, group = set, fill = set)) +
-             geom_bar(position = "dodge", stat = "identity", color="black") +
-             theme_minimal() +
-             theme(axis.text.x=element_text(angle = 45, hjust = 1)) +
-             theme(plot.margin = unit(c(1,1,1,2), "cm")))
+      if(lineplot)
+      {
+      conta_plot <- ggplot(score_df, aes(y = score, x = condition, group = set, color = set)) +
+               geom_line() +
+               theme_minimal() +
+               theme(axis.text.x=element_text(angle = 45, hjust = 1)) +
+               theme(plot.margin = unit(c(1,1,1,2), "cm"))
+      } else
+      {
+        conta_plot <- ggplot(score_df, aes(y = score, x = condition, group = set, fill = set)) +
+               geom_bar(position = "dodge", stat = "identity", color="black") +
+               theme_minimal() +
+               theme(axis.text.x=element_text(angle = 45, hjust = 1)) +
+               theme(plot.margin = unit(c(1,1,1,2), "cm"))
+      }
     } else
     {
-      plot(ggplot(score_df, aes(y = score, x = condition, group = set, fill = set)) +
-             geom_bar(position = "dodge", stat = "identity", color="black") +
-             theme_minimal() +
-             theme(axis.text.x=element_text(angle = 45, hjust = 1)) +
-             theme(plot.margin = unit(c(1,1,1,2), "cm")) +
-             scale_fill_manual(values=manual_colors))
-
+      if(lineplot)
+      {
+        conta_plot <- ggplot(score_df, aes(y = score, x = condition, group = set, color = set)) +
+               geom_line() +
+               theme_minimal() +
+               theme(axis.text.x=element_text(angle = 45, hjust = 1)) +
+               theme(plot.margin = unit(c(1,1,1,2), "cm"))
+      } else
+      {
+        conta_plot <- ggplot(score_df, aes(y = score, x = condition, group = set, fill = set)) +
+               geom_bar(position = "dodge", stat = "identity", color="black") +
+               theme_minimal() +
+               theme(axis.text.x=element_text(angle = 45, hjust = 1)) +
+               theme(plot.margin = unit(c(1,1,1,2), "cm")) +
+               scale_fill_manual(values=manual_colors)
+      }
     }
 
 
   }
-  return(score_df)
+  return(list("score_df" = score_df, "conta_plot" = conta_plot))
 }

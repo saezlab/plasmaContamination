@@ -35,7 +35,7 @@ plasma_contamination <- function(df, n_perm = 1000, plot = T, verbose = T, signa
     means <- decoupleR::decouple(mat = as.matrix(df), network = signatures, .source = "set", .target = "feature",
                                  statistics = c("wmean"),
                                  args = list(
-                                   mean = list(.mor = "mor", .likelihood = "likelihood", times=n_perm)
+                                   wmean = list(.mor = "mor", .likelihood = "likelihood", times=n_perm)
                                  )
     )
     means <- as.data.frame(means)
@@ -60,7 +60,7 @@ plasma_contamination <- function(df, n_perm = 1000, plot = T, verbose = T, signa
       means <- decoupleR::decouple(mat = as.matrix(sub_df), network = signatures, .source = "set", .target = "feature",
                                    statistics = c("wmean"),
                                    args = list(
-                                     mean = list(.mor = "mor", .likelihood = "likelihood", times=n_perm)
+                                     wmean = list(.mor = "mor", .likelihood = "likelihood", times=n_perm)
                                    )
       )
       means <- as.data.frame(means)

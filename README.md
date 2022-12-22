@@ -19,3 +19,9 @@ data(test_data)
 
 conta_scores <- plasma_contamination(test_data)
 ```
+
+# Citation
+
+Pre-analytical processing of plasma and serum samples for combined proteome and metabolome analysis
+https://www.frontiersin.org/articles/10.3389/fmolb.2022.961448/full
+
